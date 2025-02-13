@@ -1,13 +1,15 @@
-const flipBook = (elBook) => {
-  elBook.style.setProperty("--c", 0); // Set current page
-  elBook.querySelectorAll(".page").forEach((page, idx) => {
-    page.style.setProperty("--i", idx);
-    page.addEventListener("click", (evt) => {
-      if (evt.target.closest("a")) return;
-      const curr = evt.target.closest(".back") ? idx : idx + 1;
-      elBook.style.setProperty("--c", curr);
-    });
-  });
-};
+function showBook() {
+    document.querySelector('.main-page').classList.add('hidden');
+    document.querySelector('.book-container').classList.remove('hidden');
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
 
-document.querySelectorAll(".book").forEach(flipBook);
+    function flipPage() {
+        if (currentPage < pages.length - 1) {
+            pages[currentPage].style.transform = 'rotateY(-180deg)';
+            currentPage++;
+        }
+    }
+
+    document.addEventListener('click', flipPage);
+}
